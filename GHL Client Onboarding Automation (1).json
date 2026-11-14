@@ -1,0 +1,307 @@
+{
+  "name": "GHL Client Onboarding Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "client-onboarding",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        -400,
+        -16
+      ],
+      "id": "5818e166-6419-49e1-88e9-5833f49734cf",
+      "name": "Webhook",
+      "webhookId": "faf7e8be-96d2-4bb4-a154-2d173e5dd190"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1l04fkImuS5IIfLC3ifbjJlcSbRivEaVKcTTWz6WHfrA",
+          "mode": "list",
+          "cachedResultName": "GHL Client Onboarding",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1l04fkImuS5IIfLC3ifbjJlcSbRivEaVKcTTWz6WHfrA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1l04fkImuS5IIfLC3ifbjJlcSbRivEaVKcTTWz6WHfrA/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Client Name": "={{ $json.body.client_name }}",
+            "Client Email": "={{ $json.body.client_email }}",
+            "Company Name": "={{ $json.body.company_name }}",
+            "Phone": "={{ $json.body.phone }}",
+            "Service": "={{ $json.body.service }}",
+            "Status": "New"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Client Name",
+              "displayName": "Client Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Client Email",
+              "displayName": "Client Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Company Name",
+              "displayName": "Company Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Service",
+              "displayName": "Service",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -176,
+        -16
+      ],
+      "id": "93f77f6a-2fb3-4a6f-bcee-c8f7e2ad91ee",
+      "name": "Append row in sheet",
+      "retryOnFail": true,
+      "waitBetweenTries": 2000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "yVoHFoswgxqrKbPm",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json[\"Client Email\"] }}",
+        "subject": "Welcome to Our Client Onboarding Program!",
+        "message": "=<p>Dear {{ $json[\"Client Name\"] }},</p>\n\n<p>Welcome aboard! We are excited to begin working with\n<strong>{{ $json[\"Company Name\"] }}</strong>.</p>\n\n<p>Your onboarding request for\n<strong>{{ $json[\"Service\"] }}</strong>\nhas been received successfully.</p>\n\n<p>Our team will contact you shortly with the next steps.</p>\n\n<p>Best regards,<br>Client Onboarding Team</p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        48,
+        -16
+      ],
+      "id": "abd2696b-67b2-4244-b24f-638176ac84b2",
+      "name": "Send a message",
+      "webhookId": "437fc3d5-922a-4b31-9ea9-87f889b101f9",
+      "retryOnFail": true,
+      "waitBetweenTries": 2000,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "oexuQCdysoe2WTLB",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1l04fkImuS5IIfLC3ifbjJlcSbRivEaVKcTTWz6WHfrA",
+          "mode": "list",
+          "cachedResultName": "GHL Client Onboarding",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1l04fkImuS5IIfLC3ifbjJlcSbRivEaVKcTTWz6WHfrA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1677001270,
+          "mode": "list",
+          "cachedResultName": "Sheet2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1l04fkImuS5IIfLC3ifbjJlcSbRivEaVKcTTWz6WHfrA/edit#gid=1677001270"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Client Name": "={{ $('Webhook').item.json.body.client_name }}",
+            "Client Email": "={{ $('Webhook').item.json.body.client_email }}",
+            "Assigned To": "Onboarding Team",
+            "Status": "pending",
+            "Due Date": "={{ $now.plus({ days: 2 }).toFormat('yyyy-MM-dd') }}",
+            "Task Name": "Initial Client Onboarding"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Client Name",
+              "displayName": "Client Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Client Email",
+              "displayName": "Client Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Task Name",
+              "displayName": "Task Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Assigned To",
+              "displayName": "Assigned To",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Due Date",
+              "displayName": "Due Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        272,
+        -16
+      ],
+      "id": "80785570-b2bb-4902-be1f-6e641c70bad5",
+      "name": "Append row in sheet1",
+      "retryOnFail": true,
+      "waitBetweenTries": 2000,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "yVoHFoswgxqrKbPm",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "c0a0863f-734a-4249-a68a-b6d0a366b8df",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8013d71a8bc435602c4265c0a7ece8552bf11164c4a71e2c2ba8d69801943449"
+  },
+  "nodeGroups": [],
+  "id": "brExfT3PIAK9UyMn",
+  "tags": []
+}
